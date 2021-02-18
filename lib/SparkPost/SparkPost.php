@@ -13,7 +13,7 @@ class SparkPost
     /**
      * @var string Library version, used for setting User-Agent
      */
-    private $version = '2.2.0';
+    private $version = '3.0.0';
 
     /**
      * @var HttpClient|HttpAsyncClient used to make requests
@@ -181,7 +181,7 @@ class SparkPost
             $body = $payload;
         }
 
-        $url = $this->getUrl($uri, $params);
+        $uri = $this->getUrl($uri, $params);
         $headers = $this->getHttpHeaders($headers);
 
         // Sparkpost API will not tolerate form feed in JSON.
@@ -192,7 +192,7 @@ class SparkPost
 
         return [
             'method' => $method,
-            'url' => $url,
+            'uri' => $uri,
             'headers' => $headers,
             'body' => $body,
         ];

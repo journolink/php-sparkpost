@@ -4,8 +4,9 @@ namespace SparkPost\Test;
 
 use SparkPost\SparkPost;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class TransmissionTest extends \PHPUnit_Framework_TestCase
+class TransmissionTest extends TestCase
 {
     private $clientMock;
     /** @var SparkPost */
@@ -51,7 +52,7 @@ class TransmissionTest extends \PHPUnit_Framework_TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    public function setUp(): void
     {
         //setup mock for the adapter
         $this->clientMock = Mockery::mock('Http\Adapter\Guzzle6\Client');
@@ -59,16 +60,15 @@ class TransmissionTest extends \PHPUnit_Framework_TestCase
         $this->resource = new SparkPost($this->clientMock, ['key' => 'SPARKPOST_API_KEY', 'async' => false]);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testInvalidEmailFormat()
     {
+        $this->expectException(\Exception::class);
+
         $this->postTransmissionPayload['recipients'][] = [
             'address' => 'invalid email format',
         ];

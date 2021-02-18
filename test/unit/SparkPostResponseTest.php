@@ -2,10 +2,11 @@
 
 namespace SparkPost\Test;
 
+use PHPUnit\Framework\TestCase;
 use SparkPost\SparkPostResponse;
 use Mockery;
 
-class SparkPostResponseTest extends \PHPUnit_Framework_TestCase
+class SparkPostResponseTest extends TestCase
 {
     /**
      * (non-PHPdoc).
@@ -14,7 +15,7 @@ class SparkPostResponseTest extends \PHPUnit_Framework_TestCase
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->returnValue = 'some_value_to_return';
         $this->responseMock = Mockery::mock('Psr\Http\Message\ResponseInterface');
